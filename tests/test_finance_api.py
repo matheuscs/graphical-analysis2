@@ -1,9 +1,20 @@
-import unittest
-from finance_api import *
+from unittest import TestCase, mock
+import json
+import finance_api
 
 
-class TestFinanceAPI(unittest.TestCase):
-    def test_make_api_request(self):
-        self.assertRegex(
-            make_api_request(),
-            r'formation": "Daily Time Series with Splits and Dividend Events",')
+def mocked_make_api_request():
+    with open('./data/mocked_request_data.txt', 'r') as f:
+        return json.load(f)
+
+
+class TestFinanceAPI(TestCase):
+    @mock.patch('finance_api.make_api_request',
+                side_effect=mocked_make_api_request)
+    def test_make_api_request(self, _):
+        fun = finance_api.make_api_request()
+        self.assertIn('Meta Data', fun)
+        self.assertIn('1. Information', fun['Meta Data'])
+        self.assertIn('Daily Time Series with Splits and Dividend Events',
+                      fun['Meta Data']['1. Information'])
+        self.assertIn('Time Series (Daily)', fun)
