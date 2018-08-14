@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/matheuscs/graphical-analysis2.svg?branch=unit)](https://travis-ci.com/matheuscs/graphical-analysis2)
+[![Build Status](https://travis-ci.com/matheuscs/graphical-analysis2.svg?branch=master)](https://travis-ci.com/matheuscs/graphical-analysis2)
 
 # graphical-analysis2
 
