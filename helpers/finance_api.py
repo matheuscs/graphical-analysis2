@@ -1,15 +1,15 @@
 import pandas as pd
 import requests
 import json
-import constants
+from helpers import constants
 
 
 def make_api_request(stock_symbol):
     return json.loads(requests.get(constants.API_URL.format(stock_symbol)).text)
 
 
-def get_stock_data(stock_symbol, output_size):
-    time_series = make_api_request(stock_symbol)['Time Series (Daily)']
+def dataframe_from_request_output(api_request, output_size):
+    time_series = api_request['Time Series (Daily)']
     index = []
     data = []
 
