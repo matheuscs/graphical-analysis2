@@ -22,7 +22,8 @@ class TestDB(TestCase):
     def test_bulk_insert(self, _):
         stock_data = api.dataframe_from_request_output(
             api.make_api_request('bbas3'), 20)
-        db.bulk_insert(stock_data)
+        self.assertFalse(db.create_table())
+        self.assertFalse(db.bulk_insert(stock_data))
 
     def test_read(self):
         self.assertEqual(
