@@ -47,18 +47,20 @@ def bulk_insert(stock_data):
     conn.close()
 
 
-def read(symbol, days_delta=9999):
+def read(symbol, output_size):
     conn = sqlite3.connect(constants.DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
     SELECT * FROM stocks
-    WHERE symbol=? AND date>?
-    """, (symbol, date.today() + timedelta(-days_delta)))
+    WHERE symbol=?
+    """, (symbol, ))
     index = []
     data = []
     for row in cursor.fetchall():
         index.append(row[1])
         data.append([row[2], row[3], row[4], row[5], row[6]])
+        if len(index) == output_size:
+            break
     conn.close()
 
     return pd.DataFrame(data, index=index,
