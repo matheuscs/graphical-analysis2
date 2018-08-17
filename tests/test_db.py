@@ -1,6 +1,5 @@
-from unittest import TestCase, mock, main
+from unittest import TestCase, mock
 from helpers import db, constants
-import os
 import sqlite3
 import json
 import helpers.finance_api as api
