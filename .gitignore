@@ -1,5 +1,7 @@
 .idea/
 .pytest_cache/
+.tox/
+*.egg-info/
 __pycache__
 venv/
 data/stocks.db

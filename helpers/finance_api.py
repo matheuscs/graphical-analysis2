@@ -12,7 +12,8 @@ def request_stock_values(stock_symbol):
 
 def request_rsi(stock_symbol):
     """Request the stock rsi's close values to the api."""
-    return json.loads(requests.get(constants.RSI_API.format(stock_symbol)).text)
+    return json.loads(requests.get(constants.RSI_API
+                                   .format(stock_symbol)).text)
 
 
 def stock_values_as_dataframe(stock_values, output_size):
@@ -55,4 +56,3 @@ def rsi_as_dataframe(rsi, output_size):
 def add_rsi_to_dataframe(stock_values_df, rsi_df):
     """Merge stock values data frame and rsi dataframe"""
     return stock_values_df.join(rsi_df)
-
