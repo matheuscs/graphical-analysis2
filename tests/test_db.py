@@ -5,8 +5,14 @@ import json
 import helpers.finance_api as api
 
 
-def mocked_request_stock_values(_):
-    with open(constants.MOCKED_STOCK_VALUES_PATH, 'r') as f:
+def mocked_request_stock_values(stock_symbol):
+    with open(constants.MOCKED_STOCK_VALUES_PATH
+                      .format(stock_symbol), 'r') as f:
+        return json.load(f)
+
+
+def mocked_request_rsi(stock_symbol):
+    with open(constants.MOCKED_RSI_PATH.format(stock_symbol), 'r') as f:
         return json.load(f)
 
 
