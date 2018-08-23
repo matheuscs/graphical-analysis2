@@ -5,6 +5,7 @@ from helpers import constants
 
 
 def create_table():
+    """Create stock values database."""
     conn = sqlite3.connect(constants.DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
@@ -23,6 +24,7 @@ def create_table():
 
 
 def drop_table():
+    """Drop stock values database."""
     conn = sqlite3.connect(constants.DB_PATH)
     cursor = conn.cursor()
     cursor.execute("DROP TABLE IF EXISTS stocks")
@@ -31,6 +33,7 @@ def drop_table():
 
 
 def bulk_insert(stock_data):
+    """Insert dataframed stock values into the database."""
     data = []
     for index, row in stock_data.iterrows():
         data.append(('bbas3', index, row[0], row[1], row[2], row[3], row[4]))
@@ -46,6 +49,7 @@ def bulk_insert(stock_data):
 
 
 def read(symbol, output_size):
+    """Read specified symbol limited to the indicated output size."""
     conn = sqlite3.connect(constants.DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
@@ -66,6 +70,7 @@ def read(symbol, output_size):
 
 
 def delete_all():
+    """Delete all data from the database."""
     conn = sqlite3.connect(constants.DB_PATH)
     cursor = conn.cursor()
     cursor.execute('DELETE FROM stocks')
