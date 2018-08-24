@@ -33,15 +33,13 @@ class TestFinanceAPI(TestCase):
         self.assertIn('7: Time Zone', rsi_meta_data)
 
     def test_rsi_as_dataframe(self):
-        self.assertEqual(
-            len(api.rsi_as_dataframe(self.rsi, 20)), 20)
-        self.assertEqual(
-            api.rsi_as_dataframe(self.rsi, 20).size, 20)
+        df = api.rsi_as_dataframe(self.rsi, 20)
+        self.assertEqual(len(df), 20)
+        self.assertEqual(df.size, 20)
 
     def test_add_rsi_to_dataframe(self):
         sv_df = api.stock_values_as_dataframe(self.stock_values, 20)
         rsi_df = api.rsi_as_dataframe(self.rsi, 20)
-        self.assertEqual(
-            len(api.add_rsi_to_dataframe(sv_df, rsi_df)), 20)
-        self.assertEqual(
-            api.add_rsi_to_dataframe(sv_df, rsi_df).size, 120)
+        df = api.add_rsi_to_dataframe(sv_df, rsi_df)
+        self.assertEqual(len(df), 20)
+        self.assertEqual(df.size, 120)
