@@ -1,8 +1,10 @@
 from unittest import TestCase, mock
-from ga2.helpers import db, constants
+from flaskr.ga2.helpers import db
+from flaskr.ga2.helpers import constants
 import sqlite3
 import json
-import ga2.helpers.finance_api as api
+
+import flaskr.ga2.helpers.finance_api as api
 
 
 def mocked_request_stock_values(stock_symbol):
@@ -17,7 +19,7 @@ def mocked_request_rsi(stock_symbol):
 
 
 class TestDB(TestCase):
-    @mock.patch('ga2.helpers.finance_api.request_stock_values',
+    @mock.patch('flaskr.ga2.helpers.finance_api.request_stock_values',
                 side_effect=mocked_request_stock_values)
     def test_create_drop_read_table_stock_values(self, _):
         self.assertFalse(db.drop_table())
@@ -33,9 +35,9 @@ class TestDB(TestCase):
         self.assertEqual(len(db.read('itub4', 10)), 0)
         self.assertEqual(db.read('itub4', 10).size, 00)
 
-    @mock.patch('ga2.helpers.finance_api.request_stock_values',
+    @mock.patch('flaskr.ga2.helpers.finance_api.request_stock_values',
                 side_effect=mocked_request_stock_values)
-    @mock.patch('ga2.helpers.finance_api.request_rsi',
+    @mock.patch('flaskr.ga2.helpers.finance_api.request_rsi',
                 side_effect=mocked_request_rsi)
     def test_create_drop_read_table_rsi(self, _, __):
         self.assertFalse(db.drop_table())

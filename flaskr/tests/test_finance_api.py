@@ -1,5 +1,5 @@
 from unittest import TestCase
-from ga2.helpers import finance_api as api
+from flaskr.ga2.helpers import finance_api as api
 
 
 class TestFinanceAPI(TestCase):

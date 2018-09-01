@@ -1,14 +1,14 @@
 from unittest import TestCase
 
-from ga2.analysis.rsi_divergence import find_oversold, find_rsi_divergence, \
-    highlight_rsi_divergences
-from ga2.helpers import db
+from flaskr.ga2.analysis.rsi_divergence import find_oversold, \
+    find_rsi_divergence, highlight_rsi_divergences
+from flaskr.ga2.helpers import db
 
 
 class TestRSIDIvergence(TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.stock_df = db.read('bbas3', 120)
+        cls.stock_df = db.read('hbor3', 120)
 
     def test_find_oversold(self):
         df = find_oversold(self.stock_df)

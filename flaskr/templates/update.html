@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Stock Symbols{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for stock_symbol in stock_symbols%}
+    <li>
+        {{stock_symbol}}
+    </li>
+    {% endfor %}
+</ul>
+<p>{{msg}}</p>
+<p>{{df}}</p>
+<p><a href="/update/insert/hbor3">inserir hbor3</a></p>
+<p><a href="/update/delete">remover todos os dados da tabela</a></p>
+{% endblock %}

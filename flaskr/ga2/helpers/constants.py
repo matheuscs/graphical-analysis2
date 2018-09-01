@@ -11,7 +11,7 @@ RSI_API = '{}?function=RSI&symbol={}.SA&interval=daily&time_period=14&' \
 
 
 # SYSTEM PATHS
-ROOT_PATH = './ga2/'
+ROOT_PATH = './flaskr/ga2/'
 MOCKED_STOCK_VALUES_PATH = path.join(ROOT_PATH,
                                      'data/mocked_stock_values_{}.txt')
 MOCKED_RSI_PATH = path.join(ROOT_PATH, 'data/mocked_rsi_{}.txt')
