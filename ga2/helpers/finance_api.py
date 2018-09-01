@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 import json
-from helpers import constants
+from ga2.helpers import constants
 
 
 def request_stock_values(stock_symbol):

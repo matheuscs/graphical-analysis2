@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from analysis.rsi_divergence import find_oversold, find_rsi_divergence, \
+from ga2.analysis.rsi_divergence import find_oversold, find_rsi_divergence, \
     highlight_rsi_divergences
-from helpers import db
+from ga2.helpers import db
 
 
 class TestRSIDIvergence(TestCase):

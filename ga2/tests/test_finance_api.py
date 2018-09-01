@@ -1,5 +1,5 @@
 from unittest import TestCase
-from helpers import finance_api as api
+from ga2.helpers import finance_api as api
 
 
 class TestFinanceAPI(TestCase):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from modules.candlesticks import get_body_size, get_upper_shadow_size, \
+from ga2.modules.candlesticks import get_body_size, get_upper_shadow_size, \
     get_lower_shadow_size
 
 

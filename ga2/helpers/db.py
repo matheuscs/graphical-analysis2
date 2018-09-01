@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 
-from helpers import constants
+from ga2.helpers import constants
 
 
 def create_table():
