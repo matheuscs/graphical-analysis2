@@ -12,8 +12,14 @@
     </li>
     {% endfor %}
 </ul>
+
+<form action="/update/insert" method="post">
+    <input type="text" name="stock_symbol" width="50px">
+    <input type="submit" value="Submit">
+</form>
+
 <p>{{msg}}</p>
-<p>{{df}}</p>
-<p><a href="/update/insert/hbor3">inserir hbor3</a></p>
+<p>{{df | safe}}</p>
+
 <p><a href="/update/delete">remover todos os dados da tabela</a></p>
 {% endblock %}

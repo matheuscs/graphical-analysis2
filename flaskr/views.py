@@ -2,7 +2,7 @@
 só de zoas seguindo a live do cara agora falando sobre blueprint
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from .ga2.analysis.rsi_divergence import find_rsi_divergence, find_oversold
 from .ga2.helpers import db
@@ -16,11 +16,17 @@ def view_index():
     return render_template('index.html')
 
 
-@bp.route('/stock_values')
+@bp.route('/stock_values', methods=['GET', 'POST'])
 def view_stock_values():
+    if request.method == "POST":
+        stock_symbol = request.form['stock_symbol']
+    else:
+        stock_symbol = ''
+    df = db.read(stock_symbol, 60)
     return render_template(
         'stock_values.html',
-        stock_values=db.read('hbor3', 180)
+        stock_symbol=stock_symbol,
+        df=df.to_html()
     )
 
 
@@ -42,27 +48,33 @@ def view_delete():
     )
 
 
-@bp.route('/update/insert/<stock_symbol>')
-def view_update_insert(stock_symbol):
+@bp.route('/update/insert', methods=['POST'])
+def view_update_insert():
+    stock_symbol = request.form['stock_symbol']
     sv_df = api.stock_values_as_dataframe(
-        api.request_stock_values(stock_symbol), 180)
+        api.request_stock_values(stock_symbol), 60)
     rsi_df = api.rsi_as_dataframe(
-        api.request_rsi(stock_symbol), 180)
+        api.request_rsi(stock_symbol), 60)
     df = api.add_rsi_to_dataframe(sv_df, rsi_df)
     db.bulk_insert(stock_symbol, df)
     return render_template(
         'update.html',
         msg=f"{stock_symbol} adicionado com sucesso.",
-        df=df
+        df=df.to_html()
     )
 
 
-@bp.route('/rsi_div')
+@bp.route('/rsi_div', methods=['GET', 'POST'])
 def view_rsi_div():
-    df = find_rsi_divergence(find_oversold(db.read('hbor3', 180)))
+    if request.method == "POST":
+        stock_symbol = request.form['stock_symbol']
+    else:
+        stock_symbol = ''
+    df = find_rsi_divergence(find_oversold(db.read(stock_symbol, 60)))
     return render_template(
         'rsi_div.html',
-        df=df
+        stock_symbol=stock_symbol,
+        df=df.to_html()
     )
 
 

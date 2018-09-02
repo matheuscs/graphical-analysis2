@@ -62,6 +62,8 @@ def read(symbol, output_size):
     cursor.execute("""
     SELECT * FROM stocks
     WHERE symbol=?
+    ORDER BY date
+    DESC
     """, (symbol, ))
     index = []
     data = []
